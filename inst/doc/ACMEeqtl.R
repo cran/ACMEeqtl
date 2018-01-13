@@ -1,18 +1,18 @@
-## ----setup, include=FALSE------------------------------------------------
+## ----setup, include=FALSE--------------------------------------------------
 # knitr::opts_chunk$set(echo = TRUE)
 
-## ----install, eval=FALSE-------------------------------------------------
-#  install.packages('ACMEeqtl')
+## ----install, eval=FALSE---------------------------------------------------
+#  install.packages("ACMEeqtl")
 
-## ----loadHidden, echo=FALSE, warning=FALSE, message=FALSE----------------
+## ----loadHidden, echo=FALSE, warning=FALSE, message=FALSE------------------
 library(pander)
 panderOptions("digits", 3)
 library(ACMEeqtl)
 
-## ----load----------------------------------------------------------------
+## ----load------------------------------------------------------------------
 library(ACMEeqtl)
 
-## ----singleInit----------------------------------------------------------
+## ----singleInit------------------------------------------------------------
 # Model parameters
 beta0 = 10000
 beta1 = 50000
@@ -34,19 +34,18 @@ y = log(beta0 + beta1 * s) +
 	cvrt %*% rnorm(ncvrt) + 
 	rnorm(nsample)
 
-## ----singleEstim---------------------------------------------------------
+## ----singleEstim-----------------------------------------------------------
 z1 = effectSizeEstimationR(s, y, cvrt)
 z2 = effectSizeEstimationC(s, y, cvrt)
 
 pander(rbind(z1,z2))
 
-## ----eqtlInit------------------------------------------------------------
-tempdirectory = tempdir();
-#tempdirectory = "~/Desktop/package_tests"
+## ----eqtlInit--------------------------------------------------------------
+tempdirectory = tempdir()
 z = create_artificial_data(
     nsample = 100,
-    ngene = 500,
-    nsnp = 5000,
+    ngene = 100,
+    nsnp = 501,
     ncvrt = 1,
     minMAF = 0.2,
     saveDir = tempdirectory,
@@ -55,7 +54,7 @@ z = create_artificial_data(
     savetxt = FALSE,
     verbose = FALSE)
 
-## ----eqtlEstim-----------------------------------------------------------
+## ----eqtlEstim-------------------------------------------------------------
 multithreadACME(
     genefm = "gene",
     snpsfm = "snps",
@@ -63,37 +62,36 @@ multithreadACME(
     slocfm = "snps_loc",
     cvrtfm = "cvrt",
     acmefm = "ACME",
-    cisdist = 100e+03, 
+    cisdist = 1.5e+06,
     threads = 2,
-    workdir = paste0(tempdirectory,"/filematrices"),
+    workdir = file.path(tempdirectory, "filematrices"),
     verbose = FALSE)
 
-## ----eqtlLool------------------------------------------------------------
-fm = fm.open(paste0(tempdirectory,"/filematrices/ACME"))
-TenResults = fm[,1:10];
-rownames(TenResults) = rownames(fm);
-close(fm);
+## ----eqtlLool--------------------------------------------------------------
+fm = fm.open(file.path(tempdirectory, "filematrices", "ACME"))
+TenResults = fm[,1:10]
+rownames(TenResults) = rownames(fm)
+close(fm)
 
 pander(t(TenResults))
 
-## ----eqtl-multiSNP-------------------------------------------------------
+## ----eqtl-multiSNP---------------------------------------------------------
 multisnpACME(
-	genefm = 'gene',
-	snpsfm = 'snps',
-	glocfm = 'gene_loc',
-	slocfm = 'snps_loc',
-	cvrtfm = 'cvrt',
-	acmefm = 'ACME',
-	workdir = paste0(tempdirectory, "/filematrices"),
+	genefm = "gene",
+	snpsfm = "snps",
+	glocfm = "gene_loc",
+	slocfm = "snps_loc",
+	cvrtfm = "cvrt",
+	acmefm = "ACME",
+	workdir = file.path(tempdirectory, "filematrices"),
 	genecap = Inf,
 	verbose = FALSE)
 
-
-## ----eqtlLool2-----------------------------------------------------------
-fm = fm.open(paste0(tempdirectory,"/filematrices/ACME_multiSNP"))
-TenResults = fm[,1:10];
-rownames(TenResults) = rownames(fm);
-close(fm);
+## ----eqtlLool2-------------------------------------------------------------
+fm = fm.open(file.path(tempdirectory, "filematrices", "ACME_multiSNP"))
+TenResults = fm[,1:10]
+rownames(TenResults) = rownames(fm)
+close(fm)
 
 pander(t(TenResults))
 
