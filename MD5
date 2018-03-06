@@ -1,4 +1,4 @@
-5c9060ebd943c89d454ea262c1f6320a *DESCRIPTION
+73303e801f26f989a9d9313dcce74d9f *DESCRIPTION
 70124ad095aade732e90f1f3132f07de *NAMESPACE
 7a7d6a65341637849b6948c29b7cea28 *R/ACMEeqtl.r
 56260fd6b973c9ee00e3f9e19ac7e9af *R/make_eQTL_data.r
@@ -6,14 +6,14 @@
 1a9d9c70c2c4a7fc31c16c6712a5e4d5 *R/parallel_process.r
 53db035d20a32aba82bc3af4f40624c8 *build/vignette.rds
 fcf3c28c19edf26076596bc5705c8f28 *inst/CITATION
-93859af37c12558332988539b28616a9 *inst/doc/ACMEeqtl.R
-6ea6922d5c59d2924b3b8a7c777b864a *inst/doc/ACMEeqtl.Rmd
-92eeb9d46320715defeaed610265f6b9 *inst/doc/ACMEeqtl.html
+58c18adf9f664e5d10a2038f4120e657 *inst/doc/ACMEeqtl.R
+9876ad06337a02438d0d7f18c760c90d *inst/doc/ACMEeqtl.Rmd
+4daa3fc05122f1ab0c36f8fd82d6c8a1 *inst/doc/ACMEeqtl.html
 a9ba9a3fd222e6f59c835425c9c26b1b *man/ACMEeqtl-package.Rd
 273993da58c036cc8b51dcfe5792276b *man/create_artificial_data.Rd
 0569ac0669adfcf613c64f5d2ce565cd *man/effectSizeEstimation.Rd
-84c9238c3e474eb24af1f83d92bc7d7b *man/multisnpACME.Rd
-5e0dabcd6ce4d6c841d02e1903fef98b *man/multithreadACME.Rd
+4152bd6dfe91e2e65a12658b5776d76a *man/multisnpACME.Rd
+ba086452218b8fead097892c643d401a *man/multithreadACME.Rd
 841ec3da29ba0091cc86e55cae906de4 *src/c_code.c
-6ea6922d5c59d2924b3b8a7c777b864a *vignettes/ACMEeqtl.Rmd
+9876ad06337a02438d0d7f18c760c90d *vignettes/ACMEeqtl.Rmd
 6998c632e956445dffa05f56500140be *vignettes/bib.bib

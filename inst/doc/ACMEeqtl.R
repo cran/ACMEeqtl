@@ -1,18 +1,18 @@
-## ----setup, include=FALSE--------------------------------------------------
+## ----setup, include=FALSE------------------------------------------------
 # knitr::opts_chunk$set(echo = TRUE)
 
-## ----install, eval=FALSE---------------------------------------------------
+## ----install, eval=FALSE-------------------------------------------------
 #  install.packages("ACMEeqtl")
 
-## ----loadHidden, echo=FALSE, warning=FALSE, message=FALSE------------------
+## ----loadHidden, echo=FALSE, warning=FALSE, message=FALSE----------------
 library(pander)
 panderOptions("digits", 3)
 library(ACMEeqtl)
 
-## ----load------------------------------------------------------------------
+## ----load----------------------------------------------------------------
 library(ACMEeqtl)
 
-## ----singleInit------------------------------------------------------------
+## ----singleInit----------------------------------------------------------
 # Model parameters
 beta0 = 10000
 beta1 = 50000
@@ -34,13 +34,13 @@ y = log(beta0 + beta1 * s) +
 	cvrt %*% rnorm(ncvrt) + 
 	rnorm(nsample)
 
-## ----singleEstim-----------------------------------------------------------
+## ----singleEstim---------------------------------------------------------
 z1 = effectSizeEstimationR(s, y, cvrt)
 z2 = effectSizeEstimationC(s, y, cvrt)
 
 pander(rbind(z1,z2))
 
-## ----eqtlInit--------------------------------------------------------------
+## ----eqtlInit------------------------------------------------------------
 tempdirectory = tempdir()
 z = create_artificial_data(
     nsample = 100,
@@ -54,7 +54,7 @@ z = create_artificial_data(
     savetxt = FALSE,
     verbose = FALSE)
 
-## ----eqtlEstim-------------------------------------------------------------
+## ----eqtlEstim-----------------------------------------------------------
 multithreadACME(
     genefm = "gene",
     snpsfm = "snps",
@@ -67,7 +67,7 @@ multithreadACME(
     workdir = file.path(tempdirectory, "filematrices"),
     verbose = FALSE)
 
-## ----eqtlLool--------------------------------------------------------------
+## ----eqtlLool------------------------------------------------------------
 fm = fm.open(file.path(tempdirectory, "filematrices", "ACME"))
 TenResults = fm[,1:10]
 rownames(TenResults) = rownames(fm)
@@ -75,7 +75,7 @@ close(fm)
 
 pander(t(TenResults))
 
-## ----eqtl-multiSNP---------------------------------------------------------
+## ----eqtl-multiSNP-------------------------------------------------------
 multisnpACME(
 	genefm = "gene",
 	snpsfm = "snps",
@@ -87,7 +87,7 @@ multisnpACME(
 	genecap = Inf,
 	verbose = FALSE)
 
-## ----eqtlLool2-------------------------------------------------------------
+## ----eqtlLool2-----------------------------------------------------------
 fm = fm.open(file.path(tempdirectory, "filematrices", "ACME_multiSNP"))
 TenResults = fm[,1:10]
 rownames(TenResults) = rownames(fm)
